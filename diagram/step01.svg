@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" font-family="Helvetica,Arial,sans-serif">
+<rect x="30" y="40" width="200" height="200" rx="14" fill="#0d47a1"/><text x="130" y="130" font-size="24" fill="white" text-anchor="middle" font-weight="bold">MEGA</text>
+<rect x="190" y="160" width="40" height="22" fill="#e53935"/><text x="210" y="176" font-size="13" fill="white" text-anchor="middle">5V</text>
+<rect x="190" y="195" width="40" height="22" fill="#212121"/><text x="210" y="211" font-size="12" fill="white" text-anchor="middle">GND</text>
+<rect x="330" y="60" width="400" height="180" rx="8" fill="#f5f5f5" stroke="#bbb"/>
+<text x="530" y="150" font-size="18" fill="#999" text-anchor="middle">BREADBOARD</text>
+<rect x="340" y="190" width="380" height="12" fill="#e53935"/><text x="530" y="186" font-size="13" fill="#e53935" text-anchor="middle" font-weight="bold">+ (red line) rail = 5V</text>
+<rect x="340" y="214" width="380" height="12" fill="#212121"/><text x="530" y="250" font-size="13" fill="#212121" text-anchor="middle" font-weight="bold">− (blue line) rail = GND</text>
+<path d="M230 171 H 300 V 196 H 340" stroke="#e53935" stroke-width="6" fill="none"/>
+<path d="M230 206 H 290 V 220 H 340" stroke="#212121" stroke-width="6" fill="none"/>
+<text x="380.0" y="25" font-size="17" text-anchor="middle" font-weight="bold" fill="#333">Every "5V" tag = plug into the red rail.  Every "GND" tag = plug into the blue rail.</text>
+<text x="380" y="285" font-size="14" text-anchor="middle" fill="#c62828" font-weight="bold">Only exception: RFID "3.3V" goes straight to the Mega 3.3V pin.</text></svg>

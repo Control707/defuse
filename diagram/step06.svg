@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" width="560" font-family="Helvetica,Arial,sans-serif">
+<rect x="20" y="20" width="520" height="70" rx="10" fill="#c62828"/>
+<text x="280.0" y="52" font-size="24" font-weight="bold" fill="white" text-anchor="middle">3 RED LEDs (strikes)</text>
+<text x="280.0" y="76" font-size="14" fill="#cfd8dc" text-anchor="middle">long leg = +   short leg = −</text>
+<rect x="111.0" y="90" width="8" height="26" fill="#b0bec5"/>
+<text x="115.0" y="136" font-size="14" font-weight="bold" fill="#263238" text-anchor="middle">LED1 long</text>
+<line x1="115.0" y1="146" x2="115.0" y2="216" stroke="#1e88e5" stroke-width="4"/>
+<rect x="93.0" y="168" width="44" height="16" rx="7" fill="#e8d5a8" stroke="#a1887f"/><rect x="100.0" y="168" width="4" height="16" fill="#c62828"/><rect x="107.0" y="168" width="4" height="16" fill="#c62828"/><rect x="114.0" y="168" width="4" height="16" fill="#111"/><rect x="121.0" y="168" width="4" height="16" fill="#111"/><rect x="128.0" y="168" width="4" height="16" fill="#8d6e63"/><text x="143.0" y="181" font-size="13" fill="#555"></text>
+<text x="115.0" y="202" font-size="12" fill="#6d4c41" text-anchor="middle">220Ω</text>
+<rect x="86.0" y="216" width="58" height="40" rx="8" fill="#1e88e5"/>
+<text x="115.0" y="243" font-size="22" font-weight="bold" fill="white" text-anchor="middle">A8</text>
+<rect x="221.0" y="90" width="8" height="26" fill="#b0bec5"/>
+<text x="225.0" y="136" font-size="14" font-weight="bold" fill="#263238" text-anchor="middle">LED2 long</text>
+<line x1="225.0" y1="146" x2="225.0" y2="216" stroke="#1e88e5" stroke-width="4"/>
+<rect x="203.0" y="168" width="44" height="16" rx="7" fill="#e8d5a8" stroke="#a1887f"/><rect x="210.0" y="168" width="4" height="16" fill="#c62828"/><rect x="217.0" y="168" width="4" height="16" fill="#c62828"/><rect x="224.0" y="168" width="4" height="16" fill="#111"/><rect x="231.0" y="168" width="4" height="16" fill="#111"/><rect x="238.0" y="168" width="4" height="16" fill="#8d6e63"/><text x="253.0" y="181" font-size="13" fill="#555"></text>
+<text x="225.0" y="202" font-size="12" fill="#6d4c41" text-anchor="middle">220Ω</text>
+<rect x="196.0" y="216" width="58" height="40" rx="8" fill="#1e88e5"/>
+<text x="225.0" y="243" font-size="22" font-weight="bold" fill="white" text-anchor="middle">A9</text>
+<rect x="331.0" y="90" width="8" height="26" fill="#b0bec5"/>
+<text x="335.0" y="136" font-size="14" font-weight="bold" fill="#263238" text-anchor="middle">LED3 long</text>
+<line x1="335.0" y1="146" x2="335.0" y2="216" stroke="#1e88e5" stroke-width="4"/>
+<rect x="313.0" y="168" width="44" height="16" rx="7" fill="#e8d5a8" stroke="#a1887f"/><rect x="320.0" y="168" width="4" height="16" fill="#c62828"/><rect x="327.0" y="168" width="4" height="16" fill="#c62828"/><rect x="334.0" y="168" width="4" height="16" fill="#111"/><rect x="341.0" y="168" width="4" height="16" fill="#111"/><rect x="348.0" y="168" width="4" height="16" fill="#8d6e63"/><text x="363.0" y="181" font-size="13" fill="#555"></text>
+<text x="335.0" y="202" font-size="12" fill="#6d4c41" text-anchor="middle">220Ω</text>
+<rect x="306.0" y="216" width="58" height="40" rx="8" fill="#1e88e5"/>
+<text x="335.0" y="243" font-size="22" font-weight="bold" fill="white" text-anchor="middle">A10</text>
+<rect x="441.0" y="90" width="8" height="26" fill="#b0bec5"/>
+<text x="445.0" y="136" font-size="14" font-weight="bold" fill="#263238" text-anchor="middle">all short</text>
+<line x1="445.0" y1="146" x2="445.0" y2="172" stroke="#212121" stroke-width="4"/>
+<rect x="416.0" y="172" width="58" height="40" rx="8" fill="#212121"/>
+<text x="445.0" y="199" font-size="22" font-weight="bold" fill="white" text-anchor="middle">GND</text></svg>

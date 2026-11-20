@@ -1,0 +1,11 @@
+# big downloaded stuff - recreated by setup.sh
+.tools/
+ai/
+host/venv/
+host/models/
+host/voices/
+logs/test_results.txt
+diagram/preview/
+__pycache__/
+*.pyc
+.DS_Store
