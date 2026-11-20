@@ -448,5 +448,100 @@ for i, (h, c, items) in enumerate(cols):
 text(s, "AI was used in two ways: inside the game (local LLM villain, speech-to-text, neural voice) and to help build it (Claude Code for code, wiring diagrams and debugging).",
      0.85, 6.1, 11.8, 0.7, 14, MUTED)
 
+# ================================================================== SPEAKER NOTES (talking points)
+TALKING_POINTS = [
+# 1 Title
+"""• Hi, I'm Zakaria. This is DEFUSE: a bomb-defusal game you play with your hands AND your voice.
+• The bomb is built from the ELEGOO Mega 2560 kit. Inside it lives an AI villain called NINE-VOLT.
+• You talk to it out loud, it talks back, and it decides what happens in the game based on what you say.
+• Everything runs offline on a laptop: no API key, no internet.
+• All code is public on GitHub at Control707/defuse.""",
+# 2 Overview
+"""• The idea: a bomb is ticking on the table and the villain inside it is an AI.
+• Goal: defuse it before the timer hits zero. Three mistakes and it explodes.
+• What makes it different: you can talk to it. Flatter it and it may give you time; insult it and you lose time.
+• Every round is new. The AI writes fresh riddles, and each round is 20 seconds shorter, down to 2 minutes.
+• AI is used two ways: inside the game as villain, puzzle writer and game master, and as a tool to help build it.""",
+# 3 Rules
+"""• A round has stages. Stage 1, WIRES: the AI reads a riddle like "the color of the sky" and you pull the matching wire.
+• Stage 2, CODE: four tiny math problems. Each answer is one digit. Type them and press #.
+• Stage 3, CARDS, uses the RFID reader. It's built in but optional.
+• Rules: a wrong wire or wrong code is a strike. Three strikes or 0:00 means BOOM. Press D to buy a hint for 15 seconds.
+• AI mechanics: it can add or remove up to 30 seconds, freeze the clock, give a hint, skip a puzzle or add a strike.
+• The fun one: say "please" three times and it makes you do something ridiculous, like a chicken dance. Say "done" and the clock freezes for 20 seconds and you get a free hint.""",
+# 4 State machine
+"""• This is the state machine that runs on the Mega.
+• It starts in IDLE. Pressing A or saying "let's play" moves to AI THINKING, where the AI writes the riddles and Python picks the answers.
+• Then PLAYING, which has three sub-states: WIRES, CODE and CARDS.
+• From PLAYING there are two exits: DEFUSED, or BOOM on the third strike or at 0:00.
+• Key point: both the player AND the AI cause transitions. The AI sends commands like TIME, FREEZE, SKIP and STRIKE.
+• From either end state, "play again" sends ABORT and a new puzzle, so it restarts cleanly.
+• Safety net: if the AI takes more than 20 seconds, the Mega plays an offline puzzle on its own.""",
+# 5 Flowchart
+"""• Here's one round from start to finish.
+• Start: the bomb first checks all four wires are plugged in. If not, the AI tells you which color to plug back in.
+• The AI writes the riddles, the timer starts and the AI speaks the clue, which also appears on the LCD.
+• Then the loop: the player either TALKS, which goes to the AI game master and can change the bomb, or ACTS: pulls a wire, types a code.
+• Correct moves go to the next stage until the last one: DEFUSED. Wrong moves add a strike; on the third it's BOOM.
+• And the timer can hit zero at any point.""",
+# 6 Kit parts
+"""• This is the actual build. The kit is the bomb.
+• The Mega 2560 is the brain: it runs the timer, the state machine and the USB link to the AI.
+• The LCD shows the stage, the countdown and the scrolling riddle. The 10K knob sets its contrast.
+• The 4x4 keypad is for the code: # submits, * clears, A arms, D buys a hint.
+• Four jumper wires are the bomb wires. Pulling one out is "cutting" it.
+• The buzzer ticks and speeds up near the end. Three red LEDs count strikes.
+• The breadboard and power module share 5V and ground. USB connects to the laptop AI.""",
+# 7 Wiring
+"""• This diagram shows how everything connects.
+• On the laptop: Ears turn speech into text with Whisper, the Brain is Llama 3.2 running locally, and the Voice is Piper text-to-speech.
+• The Game Master sits between the AI and the bomb, talking to the Mega over USB serial.
+• On the right, the pin map. The bomb wires use INPUT_PULLUP: plugged into ground reads LOW; pulled out reads HIGH, which means cut.
+• Important design choice: the laptop never touches pins. It only sends text commands, and the Mega decides what's legal.
+• The firmware also already supports the RFID reader, 8x8 face, servo, shake sensor, ultrasonic sensor and 7-segment display. They're detected at boot.""",
+# 8 Code overview
+"""• Two programs that talk over USB.
+• The firmware is C++ on the Mega: about 750 lines. It owns the timer and the state machine, and plays a full offline game if the laptop is unplugged.
+• The host is a Python package with one module per job: ears, brain, voice, the USB link, and the game master.
+• The protocol is plain text lines. The Mega sends events like WIRE 2 BAD or BOOM; the laptop sends commands like TIME +20 or FREEZE.
+• Three safety rules: Python picks every answer so puzzles are always solvable; AI time changes are clamped; and if the AI is slow, the Mega falls back to offline puzzles.""",
+# 9 Firmware code
+"""• The firmware main loop never blocks, so the timer, keypad and LCD always stay responsive.
+• Each pass it reads serial commands from the AI, the keypad, the bomb wires and any optional sensors, then updates the timer and the screen.
+• If the AI hasn't answered within 20 seconds, it starts an offline puzzle so the game never hangs.
+• pollWires debounces: a wire only counts as cut after reading HIGH 20 loops in a row. Right wire: next stage. Wrong wire: strike.
+• Bottom right: how an AI command works. FREEZE pushes the deadline forward and turns the status light blue.""",
+# 10 Python code
+"""• This is where the AI controls the game: player_says.
+• First, it counts how many times you said "please". Three begs trigger a dare.
+• Then it asks the local LLM to act as game master and reply in JSON: what to say, how many seconds to add or remove, and an action.
+• We clamp the seconds to ±30 before anything reaches the hardware.
+• The reply is spoken out loud, and the action becomes a bomb command: hint, freeze, skip, strike or dare.
+• new_puzzle on the right: Python picks the answers first, and the AI only writes clues. We reject clues that leak the answer.
+• resolve_dare: say "done" and you get a freeze plus a free hint; refuse and you lose 15 seconds.""",
+# 11 GitHub
+"""• Everything is on GitHub at Control707/defuse. It's public, on the main branch.
+• The layout: firmware for the Mega, hardware test sketches, the host package, the wiring guide and the slides.
+• To run it: setup.sh downloads the AI model, speech model and voice. Those big files aren't in git.
+• Then upload defuse.ino with the Arduino IDE and double-click START.command.
+• No hardware? The --sim flag plays the whole game in the terminal.""",
+# 12 Limitations & challenges
+"""• Three real challenges we hit.
+• The keypad's top row was dead. We wrote a pin-scanner sketch that logged which pins touched, and found one ribbon wire plugged into 5V instead of pin 36.
+• The bomb wouldn't restart after exploding: the AI said "Initializing" but nothing happened. The fix was sending ABORT before every game and waiting for a START confirmation.
+• The small local AI was bad at math, so Python now generates the math and the AI only writes the flavor text.
+• Limitations: each AI reply takes 3 to 5 seconds; not every kit part is wired yet; the mic can mishear in a loud room, though typing still works; and the AI needs the laptop, since the Mega has no Wi-Fi.""",
+# 13 Tools
+"""• Finally, everything we used.
+• Hardware: the ELEGOO Mega 2560 kit: LCD, keypad, buzzer, LEDs, resistors, breadboard and wires.
+• Arduino side: Arduino IDE with LiquidCrystal, Keypad and the other sensor libraries.
+• AI side: Ollama running Llama 3.2 locally, faster-whisper for speech-to-text and Piper for the voice.
+• Development: Claude Code helped write the code, wiring diagrams and debugging; Git and GitHub for the repo.
+• Thank you. Happy to take questions, or you can come try to defuse it yourself.""",
+]
+assert len(TALKING_POINTS) == len(prs.slides), (len(TALKING_POINTS), len(prs.slides))
+for slide, tp in zip(prs.slides, TALKING_POINTS):
+    notes(slide, tp)
+
 prs.save(OUT)
 print("saved", OUT, "slides:", len(prs.slides))
