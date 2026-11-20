@@ -32,7 +32,14 @@ Everything runs locally on a Mac: the AI brain (Ollama), speech-to-text (Whisper
 | Path | What it is |
 |---|---|
 | `firmware/defuse/defuse.ino` | The Mega game. It also runs a standalone game without a laptop. |
-| `host/defuse_host.py` | The AI villain: brain, ears, voice, and the link to the Mega. |
+| `host/defuse_host.py` | Entry point: command-line options, wires the modules together. |
+| `host/defuse/game_master.py` | **Start here.** Game logic: puzzles, AI decisions, dares, restarts. |
+| `host/defuse/llm.py` | AI brain (local Ollama, Claude CLI, Anthropic or OpenAI). |
+| `host/defuse/ears.py` | Always-on mic and local speech-to-text (faster-whisper). |
+| `host/defuse/voice.py` | Neural voice (Piper), falling back to the macOS `say` command. |
+| `host/defuse/bomb_link.py` | USB serial link to the Mega, plus `SimBomb` for testing without hardware. |
+| `host/defuse/content.py` | Offline riddles and lines. |
+| `host/defuse/config.py` | Constants and the villain's persona. |
 | `START.command` | Starts the AI brain and the host. |
 | `diagram/WIRING_DIAGRAM.html` | Picture-based wiring guide. |
 | `WIRING.md` | Pin-by-pin wiring list. |

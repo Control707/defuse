@@ -301,9 +301,9 @@ s = new_slide("Code Overview", "two programs talking over USB")
 card(s, 0.85, 1.4, 5.8, 2.1, "firmware/defuse/defuse.ino  ·  C++ · 756 lines",
      "Runs on the Mega. Owns the timer and the state machine, reads the keypad, wires and sensors, "
      "drives the LCD, buzzer and LEDs. Plays a full offline game if the laptop is unplugged.", RED, 16, 14)
-card(s, 6.85, 1.4, 5.8, 2.1, "host/defuse_host.py  ·  Python · 912 lines",
-     "Runs on the laptop. Ears (Whisper), brain (Llama 3.2 via Ollama) and voice (Piper). "
-     "The GameMaster turns AI decisions into bomb commands, and clamps them so the AI can't break the game.", PURPLE, 16, 14)
+card(s, 6.85, 1.4, 5.8, 2.1, "host/  ·  Python package · 8 modules",
+     "Runs on the laptop: ears.py (Whisper), llm.py (Llama 3.2 via Ollama), voice.py (Piper), bomb_link.py (USB). "
+     "game_master.py turns AI decisions into bomb commands, clamped so the AI can't break the game.", PURPLE, 16, 14)
 text(s, "THE PROTOCOL (plain text lines, 115200 baud)", 0.85, 3.85, 8, 0.3, 12, AMBER, bold=True, spacing=2)
 code(s, ["Mega -> laptop:  START 240 | STAGE 1 | WIRE 2 BAD | STRIKE 1 wire | TICK 30 | BOOM time",
          "laptop -> Mega:  NEW 240 3 9519 101 | GO | MSG <riddle> | TIME +20 | FREEZE 20 | SKIP | ABORT"],
@@ -355,7 +355,7 @@ code(s, ["// AI command FREEZE <s>: stop the clock",
          "}"], 6.9, 5.45, 5.75, 1.45, 11, label="handleCommand()")
 
 # ================================================================== 10. CODE: AI
-s = new_slide("Commented Code: AI Game Master (Python)", "defuse_host.py")
+s = new_slide("Commented Code: AI Game Master (Python)", "host/defuse/game_master.py")
 code(s, ["# Everything the player says goes through here",
          "def player_says(self, text):",
          "    # 'please' x3 -> the AI demands a ridiculous dare",
@@ -399,10 +399,11 @@ text(s, "public  ·  branch main", 9.2, 1.45, 3.2, 1.05, 15, MUTED, align=PP_ALI
 code(s, ["defuse/",
          "├── firmware/defuse/defuse.ino   # Mega game",
          "├── firmware/hwtest*/            # hardware tests",
-         "├── host/defuse_host.py          # AI villain",
-         "├── host/requirements.txt        # Python deps",
+         "├── host/defuse_host.py          # entry point",
+         "├── host/defuse/game_master.py   # game logic",
+         "├── host/defuse/llm.py · ears.py · voice.py",
+         "├── host/defuse/bomb_link.py     # USB / sim",
          "├── diagram/WIRING_DIAGRAM.html  # wiring guide",
-         "├── WIRING.md                    # pin list",
          "├── setup.sh                     # one-time install",
          "├── START.command                # double-click",
          "└── README.md"], 0.85, 2.75, 7.2, 3.75, 13, label="repo layout")
